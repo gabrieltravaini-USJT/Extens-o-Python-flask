@@ -4,6 +4,10 @@ app=Flask('projeto')
 
 @app.route("/")
 def hello_world():
-    return render_template("alo.html"),200
+    nome = "Gabriel Travaini"
+    produtos = [
+        {"nome":'PC',"preço":"R$15000,00"},
+        {"nome":"Deck de magic","preço":"R$700,00"}]
+    return render_template("alo.html",n=nome,aProdutos=produtos),200
 
 app.run()
