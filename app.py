@@ -1,9 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app=Flask('projeto')
 
 @app.route("/")
 def hello_world():
-    return "Hello World, esse é o meu primeiro código FLASK!"
+    return render_template("alo.html"),200
 
 app.run()
