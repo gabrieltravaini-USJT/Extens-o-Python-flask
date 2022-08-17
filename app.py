@@ -14,4 +14,9 @@ def hello_world():
 def testeroute():
     return render_template ("testeroute.html"),200
 
+@app.route("/soma/<n1>/<n2>")
+def soma(n1,n2):
+    res = int(n1)+int(n2)
+    return render_template ("soma.html",r=res),200
+
 app.run()
