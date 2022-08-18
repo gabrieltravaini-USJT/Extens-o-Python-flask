@@ -1,9 +1,31 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 
 
 app=Flask('projeto')
+app.secret_key = "senha"
+
+
 
 @app.route("/")
+def home():
+    return render_template("login.html")
+
+@app.route('/login_validar',methods=['POST'])
+def login_validar():
+    if request.form['usuario'] == "eu" and request.form['senha'] == 'senha':
+        session['usuario'] = request.form['usuario']
+        return redirect(url_for("acesso_efetuado"))
+    else:
+        return 'SOME DAQUI',200
+
+@app.route("/restrito")
+def acesso_efetuado():
+    if session['usuario'] == 'eu':
+        return "bem vindo a zona de usuários <br>USER: {}".format(session['usuario']),200
+    else:
+        return "para de me hackear, parça",200
+
+@app.route("/hello")
 def hello_world():
     nome = "Gabriel Travaini"
     produtos = [
@@ -32,4 +54,6 @@ def form_recebe():
         return "Nome: {}".format(nome),200
     else:
         return "FEZ ERRADO, BURRO!",200
+
+
 app.run()
